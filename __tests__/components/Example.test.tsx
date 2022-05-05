@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {render} from '@testing-library/react-native';
-import TestComponent from '../src/TestComponent';
+import TestComponent from '../../src/components/TestComponent';
 
 describe('Example', () => {
   it('should test the testing library config', () => {
