@@ -1,8 +1,9 @@
 import React from 'react';
-import Reminders from './src/screens/Reminders';
+
+import Routes from './src/routes';
 
 const App: React.FC = () => {
-  return <Reminders />;
+  return <Routes />;
 };
 
 export default App;
