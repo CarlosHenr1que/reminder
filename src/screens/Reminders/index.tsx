@@ -6,7 +6,7 @@ import {ReminderCard} from '../../components';
 const Reminders: React.FC = () => {
   return (
     <Container>
-      <ReminderCard title="Fazer tarefa de calculo" onPress={() => {}} />
+      <ReminderCard title="Fazer tarefa de calculo" onPress={() => {}} done />
     </Container>
   );
 };
