@@ -1,13 +1,15 @@
-import React from 'react';
-import {Container, Title} from './styles';
+import React, {useState} from 'react';
+import {Container, Title, CheckBox} from './styles';
 
 interface Props {
   title: string;
+  onPress: () => void;
 }
 
-const ReminderCard: React.FC<Props> = ({title}) => {
+const ReminderCard: React.FC<Props> = ({title, onPress}) => {
   return (
-    <Container>
+    <Container onPress={onPress} testID="reminder_card">
+      <CheckBox />
       <Title>{title}</Title>
     </Container>
   );
