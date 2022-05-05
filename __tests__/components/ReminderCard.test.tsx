@@ -4,25 +4,29 @@ import {fireEvent, render} from '@testing-library/react-native';
 
 import {ReminderCard} from '../../src/components';
 
+const makeSut = (title: string, done: boolean) => {
+  const onPress = jest.fn();
+
+  const sut = <ReminderCard title={title} done={done} onPress={onPress} />;
+  return {
+    sut,
+    onPress,
+  };
+};
+
 describe('ReminderCard', () => {
   it('should render with correct title', () => {
     const title = 'any_title';
-    const onPress = jest.fn();
 
-    const {getByText} = render(
-      <ReminderCard title={title} onPress={onPress} />,
-    );
+    const {sut} = makeSut('any_title', false);
+    const {getByText} = render(sut);
 
     expect(getByText(title)).toBeDefined();
   });
 
   it('should call onPress when is pressed', () => {
-    const title = 'any_title';
-    const onPress = jest.fn();
-
-    const {getByTestId} = render(
-      <ReminderCard title={title} onPress={onPress} />,
-    );
+    const {sut, onPress} = makeSut('any_title', false);
+    const {getByTestId} = render(sut);
 
     fireEvent.press(getByTestId('reminder_card'));
 
