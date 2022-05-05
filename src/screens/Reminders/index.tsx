@@ -1,12 +1,30 @@
 import React from 'react';
+import {StatusBar, FlatList} from 'react-native';
 
-import {Container} from './styles';
+import {Container, Title} from './styles';
 import {ReminderCard} from '../../components';
+import Separator from '../../components/Separator';
 
 const Reminders: React.FC = () => {
+  const mock = [
+    {title: 'Fazer tarefa de calculo', done: false},
+    {title: 'Fazer tarefa de database', done: false},
+  ];
   return (
     <Container>
-      <ReminderCard title="Fazer tarefa de calculo" onPress={() => {}} done />
+      <StatusBar backgroundColor="#2B2B2B" />
+      <Title>Lembretes</Title>
+      <FlatList
+        data={mock}
+        ItemSeparatorComponent={() => <Separator />}
+        renderItem={({item}) => (
+          <ReminderCard
+            title={item.title}
+            done={item.done}
+            onPress={() => {}}
+          />
+        )}
+      />
     </Container>
   );
 };
