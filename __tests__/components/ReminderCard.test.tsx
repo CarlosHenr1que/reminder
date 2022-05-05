@@ -39,4 +39,11 @@ describe('ReminderCard', () => {
 
     expect(queryByTestId('done_icon')).toBeNull();
   });
+
+  it('should render done icone when done', () => {
+    const {sut} = makeSut('any_title', false);
+    const {queryByTestId} = render(sut);
+
+    expect(queryByTestId('done_icon')).toBeDefined();
+  });
 });
