@@ -32,4 +32,11 @@ describe('ReminderCard', () => {
 
     expect(onPress).toHaveBeenCalled();
   });
+
+  it('should not render done icone when not done', () => {
+    const {sut} = makeSut('any_title', false);
+    const {queryByTestId} = render(sut);
+
+    expect(queryByTestId('done_icon')).toBeNull();
+  });
 });
