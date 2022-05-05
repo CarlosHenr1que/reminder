@@ -4,11 +4,14 @@ import {StatusBar, FlatList} from 'react-native';
 import {Container, Title} from './styles';
 import {ReminderCard} from '../../components';
 import Separator from '../../components/Separator';
+import Button from '../../components/Button';
+
+import {Reminder} from '../../models';
 
 const Reminders: React.FC = () => {
-  const mock = [
-    {title: 'Fazer tarefa de calculo', done: false},
-    {title: 'Fazer tarefa de database', done: false},
+  const mock: Reminder[] = [
+    {id: '01', title: 'Fazer tarefa de calculo', done: false},
+    {id: '02', title: 'Fazer tarefa de database', done: false},
   ];
   return (
     <Container>
@@ -17,6 +20,7 @@ const Reminders: React.FC = () => {
       <FlatList
         data={mock}
         ItemSeparatorComponent={() => <Separator />}
+        keyExtractor={({id}) => id}
         renderItem={({item}) => (
           <ReminderCard
             title={item.title}
@@ -25,6 +29,7 @@ const Reminders: React.FC = () => {
           />
         )}
       />
+      <Button title="Novo lembrete" onPress={() => {}} />
     </Container>
   );
 };
