@@ -5,9 +5,12 @@ import {Container, Title} from './styles';
 import {ReminderCard, Button, Separator} from '../../components';
 
 import {useNavigation} from '@react-navigation/core';
-import {Reminder} from '../../models';
+import {useReminder} from '../../hooks/contexts/reminder';
 
 const Reminders: React.FC = () => {
+  const {
+    data: {reminders},
+  } = useReminder();
   const navigation = useNavigation();
 
   const handleCreateReminderPress = () => {
@@ -19,7 +22,7 @@ const Reminders: React.FC = () => {
       <StatusBar backgroundColor="#2B2B2B" />
       <Title>Lembretes</Title>
       <FlatList
-        data={[] as Reminder[]}
+        data={reminders}
         ItemSeparatorComponent={() => <Separator />}
         keyExtractor={({id}) => id}
         renderItem={({item}) => (
