@@ -9,6 +9,7 @@ export interface IReminderState {
 interface IReminderContextData {
   data: IReminderState;
   addReminders: (reminders: Reminder[]) => void;
+  doneReminder: (id: string) => void;
 }
 
 const ReminderContext = createContext({} as IReminderContextData);
@@ -22,8 +23,19 @@ const ReminderProvider: React.FC = ({children}) => {
     });
   };
 
+  const doneReminder = (id: string) => {
+    setData({
+      reminders: data.reminders.map(reminder => {
+        if (reminder.id === id) {
+          return {...reminder, done: true};
+        }
+        return reminder;
+      }),
+    });
+  };
+
   return (
-    <ReminderContext.Provider value={{data, addReminders}}>
+    <ReminderContext.Provider value={{data, addReminders, doneReminder}}>
       {children}
     </ReminderContext.Provider>
   );
