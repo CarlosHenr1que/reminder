@@ -18,4 +18,19 @@ describe('Reminder hook', () => {
 
     expect(result.current.data.reminders).toEqual(reminders);
   });
+
+  it('should mark reminder as done when doneReminder is called', () => {
+    const reminder = new ReminderBuilder().build();
+    const reminders = [reminder];
+
+    const {result} = renderHook(() => useReminder(), {
+      wrapper: ReminderProvider,
+    });
+
+    act(() => result.current.addReminders(reminders));
+    expect(result.current.data.reminders[0].done).toBeFalsy();
+
+    act(() => result.current.doneReminder('any_id'));
+    expect(result.current.data.reminders[0].done).toBeTruthy();
+  });
 });
