@@ -15,11 +15,11 @@ interface IReminderContextData {
 const ReminderContext = createContext({} as IReminderContextData);
 
 const ReminderProvider: React.FC = ({children}) => {
-  const [data, setData] = useState<IReminderState>({} as IReminderState);
+  const [data, setData] = useState<IReminderState>({reminders: []});
 
   const addReminders = (reminders: Reminder[]) => {
     setData({
-      reminders: [...reminders],
+      reminders: [...data.reminders, ...reminders],
     });
   };
 
