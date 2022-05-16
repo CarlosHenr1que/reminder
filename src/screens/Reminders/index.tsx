@@ -9,7 +9,7 @@ import {useReminder} from '../../hooks/contexts/reminder';
 import Choser from '../../components/Chooser';
 
 const Reminders: React.FC = () => {
-  const {data, doneReminder, undoReminder} = useReminder();
+  const {data, doneReminder, undoReminder, deleteReminder} = useReminder();
   const {reminders} = data;
   const navigation = useNavigation();
 
@@ -36,6 +36,15 @@ const Reminders: React.FC = () => {
             action: () => {
               if (selectedReminderId) {
                 doneReminder(selectedReminderId);
+              }
+            },
+          },
+          {
+            title: 'Deletar',
+            icon: 'delete',
+            action: () => {
+              if (selectedReminderId) {
+                deleteReminder(selectedReminderId);
               }
             },
           },
