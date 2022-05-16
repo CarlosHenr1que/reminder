@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StatusBar, FlatList} from 'react-native';
 
 import {Container, Title} from './styles';
@@ -6,12 +6,15 @@ import {ReminderCard, Button, Separator} from '../../components';
 
 import {useNavigation} from '@react-navigation/core';
 import {useReminder} from '../../hooks/contexts/reminder';
+import Choser from '../../components/Chooser';
 
 const Reminders: React.FC = () => {
-  const {
-    data: {reminders},
-  } = useReminder();
+  const {data, doneReminder} = useReminder();
+  const {reminders} = data;
   const navigation = useNavigation();
+
+  const [isChoserModalOpen, setIsChoserModalOpen] = useState(false);
+  const [selectedReminderId, setSelectedReminderId] = useState<string>();
 
   const handleCreateReminderPress = () => {
     navigation.navigate('CreateReminder');
@@ -20,6 +23,29 @@ const Reminders: React.FC = () => {
   return (
     <Container>
       <StatusBar backgroundColor="#2B2B2B" />
+      <Choser
+        isVisible={isChoserModalOpen}
+        close={() => {
+          setIsChoserModalOpen(false);
+          setSelectedReminderId(undefined);
+        }}
+        options={[
+          {
+            title: 'Finalizar lembrete',
+            icon: 'done',
+            action: () => {
+              if (selectedReminderId) {
+                doneReminder(selectedReminderId);
+              }
+            },
+          },
+          {
+            title: 'Cancelar',
+            icon: 'close',
+            action: () => {},
+          },
+        ]}
+      />
       <Title>Lembretes</Title>
       <FlatList
         data={reminders}
@@ -29,7 +55,10 @@ const Reminders: React.FC = () => {
           <ReminderCard
             title={item.title}
             done={item.done}
-            onPress={() => {}}
+            onPress={() => {
+              setIsChoserModalOpen(true);
+              setSelectedReminderId(item.id);
+            }}
           />
         )}
       />
