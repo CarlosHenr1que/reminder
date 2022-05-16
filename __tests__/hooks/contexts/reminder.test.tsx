@@ -35,4 +35,19 @@ describe('Reminder hook', () => {
     act(() => result.current.doneReminder('any_id'));
     expect(result.current.data.reminders[0].done).toBeTruthy();
   });
+
+  it('should not mark reminder as done when id does not exist', () => {
+    const reminder = new ReminderBuilder().build();
+    const reminders = [reminder];
+
+    const {result} = renderHook(() => useReminder(), {
+      wrapper: ReminderProvider,
+    });
+
+    act(() => result.current.addReminders(reminders));
+    expect(result.current.data.reminders[0].done).toBeFalsy();
+
+    act(() => result.current.doneReminder('any_wrong_id'));
+    expect(result.current.data.reminders[0].done).toBeFalsy();
+  });
 });
