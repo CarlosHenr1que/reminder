@@ -80,4 +80,20 @@ describe('Reminder hook', () => {
     act(() => result.current.undoReminder('any_wrong_id'));
     expect(result.current.data.reminders[0].done).toBeTruthy();
   });
+
+  it('should be able to delete a reminder', () => {
+    const defaultReminder = new ReminderBuilder().build();
+    const reminder = new ReminderBuilder().setId('any_other_id').build();
+    const reminders = [defaultReminder, {...reminder}];
+
+    const {result} = renderHook(() => useReminder(), {
+      wrapper: ReminderProvider,
+    });
+
+    act(() => result.current.addReminders(reminders));
+    expect(result.current.data.reminders).toEqual(reminders);
+
+    act(() => result.current.deleteReminder(reminder.id));
+    expect(result.current.data.reminders).toHaveLength(1);
+  });
 });
