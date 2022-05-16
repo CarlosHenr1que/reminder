@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {Option} from '../../models/Options';
+import {Option} from '../../models/Option';
 import BaseModal from '../../templates/BaseModal';
 
 import {OptionButton, Title} from './styles';
