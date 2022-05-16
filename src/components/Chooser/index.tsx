@@ -20,7 +20,10 @@ const Chooser: React.FC<Props> = ({isVisible, options, close}) => {
   return (
     <BaseModal isVisible={isVisible}>
       {options.map(({title, icon, action}) => (
-        <OptionButton key={title} onPress={() => handlePress(action)}>
+        <OptionButton
+          testID="chooser_option_button"
+          key={title}
+          onPress={() => handlePress(action)}>
           <Title>{title}</Title>
           <Icon name={icon} size={22} color="#fff" />
         </OptionButton>

@@ -2,7 +2,7 @@ import {Option} from '../src/models';
 
 export default class OptionBuilder {
   private option: Option = {
-    icon: 'any_icon',
+    icon: 'done',
     title: 'any_title',
     action: jest.fn(),
   };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {render} from '@testing-library/react-native';
+import {fireEvent, render} from '@testing-library/react-native';
 import {Chooser} from '../../src/components';
 import OptionBuilder from '../../__mocks__/Option';
 import {Option} from '../../src/models';
@@ -28,5 +28,15 @@ describe('Chooser', () => {
     const {getByText} = render(sut);
 
     expect(getByText(options[0].title)).toBeDefined();
+  });
+
+  it('should call close method when option is pressed', () => {
+    const options = makeOptionsMock();
+    const {sut, close} = makeSut(options, true);
+
+    const {getByTestId} = render(sut);
+    fireEvent.press(getByTestId('chooser_option_button'));
+
+    expect(close).toHaveBeenCalled();
   });
 });
