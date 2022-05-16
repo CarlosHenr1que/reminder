@@ -12,6 +12,11 @@ export default class ReminderBuilder {
     return this;
   }
 
+  public setStatus(status: boolean) {
+    this.reminder.done = status;
+    return this;
+  }
+
   public build() {
     const reminderClone = this.reminder;
     return reminderClone;

@@ -10,6 +10,7 @@ interface IReminderContextData {
   data: IReminderState;
   addReminders: (reminders: Reminder[]) => void;
   doneReminder: (id: string) => void;
+  undoReminder: (id: string) => void;
 }
 
 const ReminderContext = createContext({} as IReminderContextData);
@@ -34,8 +35,20 @@ const ReminderProvider: React.FC = ({children}) => {
     });
   };
 
+  const undoReminder = (id: string) => {
+    setData({
+      reminders: data.reminders.map(reminder => {
+        if (reminder.id === id) {
+          return {...reminder, done: false};
+        }
+        return reminder;
+      }),
+    });
+  };
+
   return (
-    <ReminderContext.Provider value={{data, addReminders, doneReminder}}>
+    <ReminderContext.Provider
+      value={{data, addReminders, doneReminder, undoReminder}}>
       {children}
     </ReminderContext.Provider>
   );

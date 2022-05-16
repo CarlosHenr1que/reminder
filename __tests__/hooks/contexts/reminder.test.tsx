@@ -50,4 +50,34 @@ describe('Reminder hook', () => {
     act(() => result.current.doneReminder('any_wrong_id'));
     expect(result.current.data.reminders[0].done).toBeFalsy();
   });
+
+  it('should mark reminder as undone when undoReminder is called', () => {
+    const reminder = new ReminderBuilder().setStatus(true).build();
+    const reminders = [reminder];
+
+    const {result} = renderHook(() => useReminder(), {
+      wrapper: ReminderProvider,
+    });
+
+    act(() => result.current.addReminders(reminders));
+    expect(result.current.data.reminders[0].done).toBeTruthy();
+
+    act(() => result.current.undoReminder('any_id'));
+    expect(result.current.data.reminders[0].done).toBeFalsy();
+  });
+
+  it('should not mark reminder as undone when id does not exist', () => {
+    const reminder = new ReminderBuilder().setStatus(true).build();
+    const reminders = [reminder];
+
+    const {result} = renderHook(() => useReminder(), {
+      wrapper: ReminderProvider,
+    });
+
+    act(() => result.current.addReminders(reminders));
+    expect(result.current.data.reminders[0].done).toBeTruthy();
+
+    act(() => result.current.undoReminder('any_wrong_id'));
+    expect(result.current.data.reminders[0].done).toBeTruthy();
+  });
 });
