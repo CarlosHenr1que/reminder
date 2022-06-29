@@ -48,7 +48,7 @@ const ReminderProvider: React.FC = ({children}) => {
   };
 
   const deleteReminder = (id: string) => {
-    return setData({
+    setData({
       reminders: data.reminders.filter(reminder => reminder.id !== id),
     });
   };
