@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {render} from '@testing-library/react-native';
+import {fireEvent, render} from '@testing-library/react-native';
 import Reminders from '../../src/screens/Reminders';
 import * as ReminderContext from '../../src/hooks/contexts/reminder';
 import ReminderBuilder from '../../__mocks__/Reminder';
@@ -38,5 +38,22 @@ describe('Reminders screen', () => {
     );
 
     expect(getByText(reminder.title)).toBeDefined();
+  });
+
+  it('should be able to delete a reminder', () => {
+    const reminder = new ReminderBuilder().build();
+
+    mockContext({reminders: [{...reminder}]});
+
+    const {getByText, queryByText} = render(
+      <ReminderContext.ReminderProvider>
+        <Reminders />
+      </ReminderContext.ReminderProvider>,
+    );
+
+    fireEvent.press(getByText(reminder.title));
+    fireEvent.press(getByText('Deletar'));
+
+    expect(queryByText(reminder.title)).toBeNull();
   });
 });
