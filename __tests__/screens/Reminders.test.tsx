@@ -16,7 +16,7 @@ jest.mock('@react-navigation/core', () => {
 });
 
 const mockContext = (data: ReminderContext.IReminderState) => {
-  return jest.spyOn(ReminderContext, 'useReminder').mockReturnValueOnce({
+  jest.spyOn(ReminderContext, 'useReminder').mockReturnValue({
     data,
     addReminders: jest.fn(),
     deleteReminder: jest.fn(),
@@ -45,7 +45,7 @@ describe('Reminders screen', () => {
 
     mockContext({reminders: [{...reminder}]});
 
-    const {getByText, queryByText} = render(
+    const {getByText} = render(
       <ReminderContext.ReminderProvider>
         <Reminders />
       </ReminderContext.ReminderProvider>,
@@ -54,6 +54,6 @@ describe('Reminders screen', () => {
     fireEvent.press(getByText(reminder.title));
     fireEvent.press(getByText('Deletar'));
 
-    expect(queryByText(reminder.title)).toBeNull();
+    expect(ReminderContext.useReminder().deleteReminder).toHaveBeenCalled();
   });
 });
