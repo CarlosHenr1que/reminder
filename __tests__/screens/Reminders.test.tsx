@@ -75,4 +75,23 @@ describe('Reminders screen', () => {
       reminder.id,
     );
   });
+
+  it('should be able to cancel a reminder', () => {
+    const reminder = new ReminderBuilder().build();
+
+    mockContext({reminders: [{...reminder}]});
+
+    const {getByText} = render(
+      <ReminderContext.ReminderProvider>
+        <Reminders />
+      </ReminderContext.ReminderProvider>,
+    );
+
+    fireEvent.press(getByText(reminder.title));
+    fireEvent.press(getByText('Cancelar'));
+
+    expect(ReminderContext.useReminder().undoReminder).toBeCalledWith(
+      reminder.id,
+    );
+  });
 });
