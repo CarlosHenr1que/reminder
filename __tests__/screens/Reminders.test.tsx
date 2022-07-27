@@ -56,4 +56,23 @@ describe('Reminders screen', () => {
 
     expect(ReminderContext.useReminder().deleteReminder).toHaveBeenCalled();
   });
+
+  it('should mask a reminder as done', () => {
+    const reminder = new ReminderBuilder().build();
+
+    mockContext({reminders: [{...reminder}]});
+
+    const {getByText} = render(
+      <ReminderContext.ReminderProvider>
+        <Reminders />
+      </ReminderContext.ReminderProvider>,
+    );
+
+    fireEvent.press(getByText(reminder.title));
+    fireEvent.press(getByText('Finalizar lembrete'));
+
+    expect(ReminderContext.useReminder().doneReminder).toBeCalledWith(
+      reminder.id,
+    );
+  });
 });
