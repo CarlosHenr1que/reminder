@@ -6,14 +6,14 @@ import {ReminderCard, Button, Separator} from '../../components';
 
 import {useNavigation} from '@react-navigation/core';
 import {useReminder} from '../../hooks/contexts/reminder';
-import Choser from '../../components/Chooser';
+import Chooser from '../../components/Chooser';
 
 const Reminders: React.FC = () => {
   const {data, doneReminder, undoReminder, deleteReminder} = useReminder();
   const {reminders} = data;
   const navigation = useNavigation();
 
-  const [isChoserModalOpen, setIsChoserModalOpen] = useState(false);
+  const [isChooserModalOpen, setIsChooserModalOpen] = useState(false);
   const [selectedReminderId, setSelectedReminderId] = useState<string>();
 
   const handleCreateReminderPress = () => {
@@ -23,10 +23,10 @@ const Reminders: React.FC = () => {
   return (
     <Container>
       <StatusBar backgroundColor="#2B2B2B" />
-      <Choser
-        isVisible={isChoserModalOpen}
+      <Chooser
+        isVisible={isChooserModalOpen}
         close={() => {
-          setIsChoserModalOpen(false);
+          setIsChooserModalOpen(false);
           setSelectedReminderId(undefined);
         }}
         options={[
@@ -69,7 +69,7 @@ const Reminders: React.FC = () => {
             title={item.title}
             done={item.done}
             onPress={() => {
-              setIsChoserModalOpen(true);
+              setIsChooserModalOpen(true);
               setSelectedReminderId(item.id);
             }}
           />
