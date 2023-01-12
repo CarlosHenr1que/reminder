@@ -6,6 +6,13 @@ import {
 import ReminderBuilder from '../../../__mocks__/Reminder';
 
 describe('Reminder hook', () => {
+  it('should throw an Error if hook is called outside a provider', () => {
+    const {result} = renderHook(() => useReminder());
+    expect(result.error?.message).toBe(
+      'useReminder must be within an ReminderProvider',
+    );
+  });
+
   it('should be able to save a reminder', () => {
     const defaultReminder = new ReminderBuilder().build();
     const reminder = new ReminderBuilder().setId('any_other_id').build();
