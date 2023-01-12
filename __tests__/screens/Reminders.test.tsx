@@ -5,12 +5,13 @@ import Reminders from '../../src/screens/Reminders';
 import * as ReminderContext from '../../src/hooks/contexts/reminder';
 import ReminderBuilder from '../../__mocks__/Reminder';
 
+const mockNavigate = jest.fn();
 jest.mock('@react-navigation/core', () => {
   const actualNav = jest.requireActual('@react-navigation/core');
   return {
     ...actualNav,
     useNavigation: () => ({
-      navigate: jest.fn(),
+      navigate: mockNavigate,
     }),
   };
 });
@@ -38,6 +39,17 @@ describe('Reminders screen', () => {
     );
 
     expect(getByText(reminder.title)).toBeDefined();
+  });
+
+  it('should be able to create a reminder', () => {
+    const {getByText} = render(
+      <ReminderContext.ReminderProvider>
+        <Reminders />
+      </ReminderContext.ReminderProvider>,
+    );
+
+    fireEvent.press(getByText('Novo lembrete'));
+    expect(mockNavigate).toHaveBeenCalledWith('CreateReminder');
   });
 
   it('should be able to delete a reminder', () => {
