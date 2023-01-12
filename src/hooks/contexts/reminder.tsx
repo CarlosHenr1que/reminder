@@ -64,7 +64,7 @@ const ReminderProvider: React.FC = ({children}) => {
 function useReminder(): IReminderContextData {
   const context = useContext(ReminderContext);
 
-  if (!context) {
+  if (!context.data) {
     throw new Error('useReminder must be within an ReminderProvider');
   }
 
