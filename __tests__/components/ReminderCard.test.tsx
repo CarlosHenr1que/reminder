@@ -33,14 +33,14 @@ describe('ReminderCard', () => {
     expect(onPress).toHaveBeenCalled();
   });
 
-  it('should not render done icone when not done', () => {
+  it('should not render done icon when not done', () => {
     const {sut} = makeSut('any_title', false);
     const {queryByTestId} = render(sut);
 
     expect(queryByTestId('done_icon')).toBeNull();
   });
 
-  it('should render done icone when done', () => {
+  it('should render done icon when done', () => {
     const {sut} = makeSut('any_title', true);
     const {getByTestId} = render(sut);
 
