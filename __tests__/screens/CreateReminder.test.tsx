@@ -46,4 +46,21 @@ describe('CreateReminder screen', () => {
 
     expect(ReminderContext.useReminder().addReminders).toHaveBeenCalled();
   });
+  it('should call navigate when save button is called', () => {
+    mockContext({reminders: []});
+
+    const {getByPlaceholderText, getByText} = render(
+      <ReminderContext.ReminderProvider>
+        <CreateReminder />
+      </ReminderContext.ReminderProvider>,
+    );
+
+    fireEvent.changeText(
+      getByPlaceholderText('Digite o titulo do seu lembrete'),
+      'new_reminder',
+    );
+    fireEvent.press(getByText('Salvar'));
+
+    expect(mockNavigate).toHaveBeenCalledWith('Reminders');
+  });
 });
