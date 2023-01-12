@@ -63,4 +63,20 @@ describe('CreateReminder screen', () => {
 
     expect(mockNavigate).toHaveBeenCalledWith('Reminders');
   });
+
+  it('should not call addReminder when save button is called without a title', () => {
+    const reminder = new ReminderBuilder().build();
+
+    mockContext({reminders: [{...reminder}]});
+
+    const {getByText} = render(
+      <ReminderContext.ReminderProvider>
+        <CreateReminder />
+      </ReminderContext.ReminderProvider>,
+    );
+
+    fireEvent.press(getByText('Salvar'));
+
+    expect(ReminderContext.useReminder().addReminders).toHaveBeenCalledTimes(0);
+  });
 });
