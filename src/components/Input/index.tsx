@@ -15,6 +15,7 @@ const Input: React.FC<Props> = ({value, onChange, placeholder}) => {
       onChangeText={onChange}
       placeholder={placeholder}
       placeholderTextColor="#bcbcbc"
+      testID="reminder-name-input"
     />
   );
 };
