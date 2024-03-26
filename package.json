@@ -6,8 +6,8 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
-    "test:coverage": "yarn test --coverage && jest-coverage-badges output badges",
+    "test:unit": "jest --testPathPattern=__tests__",
+    "test:coverage": "yarn test:unit --coverage && jest-coverage-badges output badges",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
