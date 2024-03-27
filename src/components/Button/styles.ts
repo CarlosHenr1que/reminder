@@ -9,8 +9,8 @@ export const Container = styled.TouchableOpacity`
 `;
 
 export const Title = styled.Text`
-font-size: 22px
-font-weight: bold;
-color: #7BC8E0;
-margin-left: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-left: 10px;
 `;
