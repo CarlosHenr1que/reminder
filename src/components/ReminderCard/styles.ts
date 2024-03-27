@@ -4,11 +4,12 @@ export const Container = styled.TouchableOpacity`
   flex-direction: row;
   width: 100%;
   height: 60px;
-  border: 1px;
-  border-color: #575757;
-  border-radius: 5px;
+  background-color: #2f2f2f;
+  border-radius: 8px;
   align-items: center;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: space-between;
 `;
 
 export const CheckBox = styled.View`

@@ -11,13 +11,12 @@ interface Props {
 const ReminderCard: React.FC<Props> = ({title, onPress, done}) => {
   return (
     <Container onPress={onPress} testID="reminder_card">
+      <Title>{title}</Title>
       <CheckBox>
         {done && (
           <Icon testID="done_icon" name="close" size={22} color="#fff" />
         )}
       </CheckBox>
-
-      <Title>{title}</Title>
     </Container>
   );
 };
