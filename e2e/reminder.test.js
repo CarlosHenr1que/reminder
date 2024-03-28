@@ -1,3 +1,5 @@
+const {getWeekDayFor} = require('../src/utils/date/format');
+
 /* eslint-disable no-undef */
 describe('Reminder', () => {
   beforeAll(async () => {
@@ -18,8 +20,12 @@ describe('Reminder', () => {
     await element(by.text(saveButton)).tap();
   };
 
-  it('should have welcome screen with correct texts', async () => {
-    await expect(element(by.text('Lembretes'))).toBeVisible();
+  it('should have reminders screen with correct texts', async () => {
+    const today = new Date();
+    const weekday = getWeekDayFor(today);
+    await expect(
+      element(by.text(`${weekday}, ${today.getDate()}`)),
+    ).toBeVisible();
     await expect(element(by.text('Novo lembrete'))).toBeVisible();
   });
   it('should create a new reminder', async () => {

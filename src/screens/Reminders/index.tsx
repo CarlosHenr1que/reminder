@@ -7,6 +7,7 @@ import {ReminderCard, Button, Separator} from '../../components';
 import {useNavigation} from '@react-navigation/core';
 import {useReminder} from '../../hooks/contexts/reminder';
 import Chooser from '../../components/Chooser';
+import {getWeekDayFor} from '../../utils/date/format';
 
 const Reminders: React.FC = () => {
   const {data, doneReminder, undoReminder, deleteReminder} = useReminder();
@@ -20,9 +21,14 @@ const Reminders: React.FC = () => {
     navigation.navigate('CreateReminder');
   };
 
+  const getTitle = () => {
+    const today = new Date();
+    return `${getWeekDayFor(today)}, ${today.getDate()}`;
+  };
+
   return (
     <Container>
-      <StatusBar backgroundColor="#2B2B2B" />
+      <StatusBar backgroundColor="#171717" />
       <Chooser
         isVisible={isChooserModalOpen}
         close={() => {
@@ -59,7 +65,7 @@ const Reminders: React.FC = () => {
           },
         ]}
       />
-      <Title>Lembretes</Title>
+      <Title>{getTitle()}</Title>
       <FlatList
         data={reminders}
         ItemSeparatorComponent={() => <Separator />}
