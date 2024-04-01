@@ -16,9 +16,27 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Routes: React.FC = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Reminders" component={Reminders} />
-        <Stack.Screen name="CreateReminder" component={CreateReminder} />
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#171717',
+          },
+          title: '',
+          headerBackTitle: 'Voltar',
+        }}>
+        <Stack.Screen
+          name="Reminders"
+          component={Reminders}
+          options={{
+            title: 'Lembretes',
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="CreateReminder"
+          component={CreateReminder}
+          options={{headerShown: true}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

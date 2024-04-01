@@ -4,6 +4,7 @@ import {fireEvent, render} from '@testing-library/react-native';
 import CreateReminder from '../../src/screens/CreateReminder';
 import * as ReminderContext from '../../src/hooks/contexts/reminder';
 import ReminderBuilder from '../../__mocks__/Reminder';
+import {AppThemeProvider} from '../../src/styles';
 
 const mockNavigate = jest.fn();
 jest.mock('@react-navigation/core', () => {
@@ -26,6 +27,12 @@ const mockContext = (data: ReminderContext.IReminderState) => {
   });
 };
 
+const sutWrapper = (children: any) => (
+  <ReminderContext.ReminderProvider>
+    <AppThemeProvider>{children}</AppThemeProvider>
+  </ReminderContext.ReminderProvider>
+);
+
 describe('CreateReminder screen', () => {
   it('should call addReminder when save button is called', () => {
     const reminder = new ReminderBuilder().build();
@@ -33,9 +40,7 @@ describe('CreateReminder screen', () => {
     mockContext({reminders: [{...reminder}]});
 
     const {getByPlaceholderText, getByText} = render(
-      <ReminderContext.ReminderProvider>
-        <CreateReminder />
-      </ReminderContext.ReminderProvider>,
+      sutWrapper(<CreateReminder />),
     );
 
     fireEvent.changeText(
@@ -50,9 +55,7 @@ describe('CreateReminder screen', () => {
     mockContext({reminders: []});
 
     const {getByPlaceholderText, getByText} = render(
-      <ReminderContext.ReminderProvider>
-        <CreateReminder />
-      </ReminderContext.ReminderProvider>,
+      sutWrapper(<CreateReminder />),
     );
 
     fireEvent.changeText(
@@ -66,14 +69,8 @@ describe('CreateReminder screen', () => {
 
   it('should not call addReminder when save button is called without a title', () => {
     const reminder = new ReminderBuilder().build();
-
     mockContext({reminders: [{...reminder}]});
-
-    const {getByText} = render(
-      <ReminderContext.ReminderProvider>
-        <CreateReminder />
-      </ReminderContext.ReminderProvider>,
-    );
+    const {getByText} = render(sutWrapper(<CreateReminder />));
 
     fireEvent.press(getByText('Salvar'));
 
