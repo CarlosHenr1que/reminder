@@ -4,6 +4,7 @@ import {fireEvent, render} from '@testing-library/react-native';
 import Reminders from '../../src/screens/Reminders';
 import * as ReminderContext from '../../src/hooks/contexts/reminder';
 import ReminderBuilder from '../../__mocks__/Reminder';
+import {AppThemeProvider} from '../../src/styles';
 
 const mockNavigate = jest.fn();
 jest.mock('@react-navigation/core', () => {
@@ -34,7 +35,9 @@ describe('Reminders screen', () => {
 
     const {getByText} = render(
       <ReminderContext.ReminderProvider>
-        <Reminders />
+        <AppThemeProvider>
+          <Reminders />
+        </AppThemeProvider>
       </ReminderContext.ReminderProvider>,
     );
 
@@ -44,7 +47,9 @@ describe('Reminders screen', () => {
   it('should be able to create a reminder', () => {
     const {getByText} = render(
       <ReminderContext.ReminderProvider>
-        <Reminders />
+        <AppThemeProvider>
+          <Reminders />
+        </AppThemeProvider>
       </ReminderContext.ReminderProvider>,
     );
 
@@ -59,7 +64,9 @@ describe('Reminders screen', () => {
 
     const {getByText} = render(
       <ReminderContext.ReminderProvider>
-        <Reminders />
+        <AppThemeProvider>
+          <Reminders />
+        </AppThemeProvider>
       </ReminderContext.ReminderProvider>,
     );
 
@@ -76,7 +83,9 @@ describe('Reminders screen', () => {
 
     const {getByText} = render(
       <ReminderContext.ReminderProvider>
-        <Reminders />
+        <AppThemeProvider>
+          <Reminders />
+        </AppThemeProvider>
       </ReminderContext.ReminderProvider>,
     );
 
@@ -95,7 +104,9 @@ describe('Reminders screen', () => {
 
     const {getByText} = render(
       <ReminderContext.ReminderProvider>
-        <Reminders />
+        <AppThemeProvider>
+          <Reminders />
+        </AppThemeProvider>
       </ReminderContext.ReminderProvider>,
     );
 
