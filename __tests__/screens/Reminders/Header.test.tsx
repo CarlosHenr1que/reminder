@@ -10,7 +10,7 @@ describe('Reminders Header', () => {
     const onPressIcon = jest.fn();
     const {getByTestId} = render(
       <AppThemeProvider>
-        <Header icon="icon-example" onPressIcon={onPressIcon} />
+        <Header icon="add" onPressIcon={onPressIcon} />
       </AppThemeProvider>,
     );
 

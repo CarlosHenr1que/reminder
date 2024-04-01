@@ -8,9 +8,9 @@ describe('Reminder', () => {
 
   const createReminder = async reminder => {
     const input = 'reminder-name-input';
-    const newReminderButton = 'Novo lembrete';
+    const newReminderButtonId = 'header-icon-button';
     const saveButton = 'Salvar';
-    await element(by.text(newReminderButton)).tap();
+    await element(by.id(newReminderButtonId)).tap();
     await waitFor(element(by.text('Novo lembrete')))
       .toBeVisible()
       .withTimeout(500);
@@ -26,7 +26,6 @@ describe('Reminder', () => {
     await expect(
       element(by.text(`${weekday}, ${today.getDate()}`)),
     ).toBeVisible();
-    await expect(element(by.text('Novo lembrete'))).toBeVisible();
   });
   it('should create a new reminder', async () => {
     const reminder = 'Comprar Pão';
