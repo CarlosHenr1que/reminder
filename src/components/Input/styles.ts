@@ -5,7 +5,8 @@ export const Container = styled.TextInput`
   height: 60px;
   border: 1px;
   border-color: #575757;
-  border-radius: 5px;
+  background: ${props => props.theme.colors.primary};
+  border-radius: ${props => props.theme.metrics.baseRadius}px;
   padding: 10px;
   color: #fff;
 `;
