@@ -2,12 +2,15 @@ import React from 'react';
 
 import {fireEvent, render} from '@testing-library/react-native';
 import {Input} from '../../src/components';
+import {AppThemeProvider} from '../../src/styles';
 
 const makeSut = (value: string, placeholder: string) => {
   const onChange = jest.fn();
 
   const sut = (
-    <Input value={value} onChange={onChange} placeholder={placeholder} />
+    <AppThemeProvider>
+      <Input value={value} onChange={onChange} placeholder={placeholder} />
+    </AppThemeProvider>
   );
 
   return {
