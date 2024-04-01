@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {fireEvent, render} from '@testing-library/react-native';
-import Reminders from '../../src/screens/Reminders';
-import * as ReminderContext from '../../src/hooks/contexts/reminder';
-import ReminderBuilder from '../../__mocks__/Reminder';
-import {AppThemeProvider} from '../../src/styles';
+import Reminders from '../../../src/screens/Reminders';
+import * as ReminderContext from '../../../src/hooks/contexts/reminder';
+import ReminderBuilder from '../../../__mocks__/Reminder';
+import {AppThemeProvider} from '../../../src/styles';
 
 const mockNavigate = jest.fn();
 jest.mock('@react-navigation/core', () => {
@@ -45,7 +45,7 @@ describe('Reminders screen', () => {
   });
 
   it('should be able to create a reminder', () => {
-    const {getByText} = render(
+    const {getByTestId} = render(
       <ReminderContext.ReminderProvider>
         <AppThemeProvider>
           <Reminders />
@@ -53,7 +53,7 @@ describe('Reminders screen', () => {
       </ReminderContext.ReminderProvider>,
     );
 
-    fireEvent.press(getByText('Novo lembrete'));
+    fireEvent.press(getByTestId('header-icon-button'));
     expect(mockNavigate).toHaveBeenCalledWith('CreateReminder');
   });
 

@@ -2,13 +2,14 @@ import React, {useState} from 'react';
 import {StatusBar, FlatList} from 'react-native';
 
 import {Title} from './styles';
-import {ReminderCard, Button, Separator} from '../../components';
+import {ReminderCard, Separator} from '../../components';
 
 import {useNavigation} from '@react-navigation/core';
 import {useReminder} from '../../hooks/contexts/reminder';
 import Chooser from '../../components/Chooser';
 import {getWeekDayFor} from '../../utils/date/format';
 import Box from '../../components/common/Box';
+import {Header} from './components/Header';
 
 const Reminders: React.FC = () => {
   const {data, doneReminder, undoReminder, deleteReminder} = useReminder();
@@ -27,9 +28,14 @@ const Reminders: React.FC = () => {
     return `${getWeekDayFor(today)}, ${today.getDate()}`;
   };
 
+  const onHeaderIconPress = () => {
+    handleCreateReminderPress();
+  };
+
   return (
     <Box flex={1} px={16} py={60} background="background">
       <StatusBar backgroundColor="#171717" />
+      <Header icon="add" onPressIcon={onHeaderIconPress} />
       <Chooser
         isVisible={isChooserModalOpen}
         close={() => {
@@ -82,7 +88,6 @@ const Reminders: React.FC = () => {
           />
         )}
       />
-      <Button title="Novo lembrete" onPress={handleCreateReminderPress} />
     </Box>
   );
 };
