@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-a\ndroid",
+    "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test:unit": "jest --testPathPattern=__tests__",
     "test:e2e:ios": "detox test --configuration ios.sim.debug",
+    "test:e2e:android": "detox test --configuration android.emu.debug",
     "test:coverage": "yarn test:unit --coverage && jest-coverage-badges output badges",
     "lint": "eslint --ext .ts --ext .tsx ./src --fix",
     "prepare": "husky"
