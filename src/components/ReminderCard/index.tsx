@@ -4,15 +4,21 @@ import {Container, Title, CheckBox} from './styles';
 
 interface Props {
   title: string;
-  onPress: () => void;
   done: boolean;
+  onCheckPress: () => void;
+  onLongPress: () => void;
 }
 
-const ReminderCard: React.FC<Props> = ({title, onPress, done}) => {
+const ReminderCard: React.FC<Props> = ({
+  title,
+  done,
+  onCheckPress,
+  onLongPress,
+}) => {
   return (
-    <Container onPress={onPress} testID="reminder_card">
+    <Container testID="reminder_card" onLongPress={onLongPress}>
       <Title>{title}</Title>
-      <CheckBox>
+      <CheckBox onPress={onCheckPress} testID="reminder_check_button">
         {done && (
           <Icon testID="done_icon" name="close" size={22} color="#fff" />
         )}

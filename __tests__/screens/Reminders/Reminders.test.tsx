@@ -70,7 +70,7 @@ describe('Reminders screen', () => {
       </ReminderContext.ReminderProvider>,
     );
 
-    fireEvent.press(getByText(reminder.title));
+    fireEvent(getByText(reminder.title), 'longPress');
     fireEvent.press(getByText('Deletar'));
 
     expect(ReminderContext.useReminder().deleteReminder).toHaveBeenCalled();
@@ -81,7 +81,7 @@ describe('Reminders screen', () => {
 
     mockContext({reminders: [{...reminder}]});
 
-    const {getByText} = render(
+    const {getByTestId} = render(
       <ReminderContext.ReminderProvider>
         <AppThemeProvider>
           <Reminders />
@@ -89,8 +89,7 @@ describe('Reminders screen', () => {
       </ReminderContext.ReminderProvider>,
     );
 
-    fireEvent.press(getByText(reminder.title));
-    fireEvent.press(getByText('Finalizar lembrete'));
+    fireEvent.press(getByTestId('reminder_check_button'));
 
     expect(ReminderContext.useReminder().doneReminder).toBeCalledWith(
       reminder.id,
@@ -110,7 +109,7 @@ describe('Reminders screen', () => {
       </ReminderContext.ReminderProvider>,
     );
 
-    fireEvent.press(getByText(reminder.title));
+    fireEvent(getByText(reminder.title), 'longPress');
     fireEvent.press(getByText('Cancelar'));
 
     expect(ReminderContext.useReminder().undoReminder).toBeCalledWith(

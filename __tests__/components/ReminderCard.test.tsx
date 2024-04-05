@@ -5,12 +5,21 @@ import {fireEvent, render} from '@testing-library/react-native';
 import {ReminderCard} from '../../src/components';
 
 const makeSut = (title: string, done: boolean) => {
-  const onPress = jest.fn();
+  const onLongPress = jest.fn();
+  const onCheckPress = jest.fn();
 
-  const sut = <ReminderCard title={title} done={done} onPress={onPress} />;
+  const sut = (
+    <ReminderCard
+      title={title}
+      done={done}
+      onLongPress={onLongPress}
+      onCheckPress={onCheckPress}
+    />
+  );
   return {
     sut,
-    onPress,
+    onLongPress,
+    onCheckPress,
   };
 };
 
@@ -24,13 +33,22 @@ describe('ReminderCard', () => {
     expect(getByText(title)).toBeDefined();
   });
 
-  it('should call onPress when is pressed', () => {
-    const {sut, onPress} = makeSut('any_title', false);
+  it('should call onLongPress when is pressed', () => {
+    const {sut, onLongPress} = makeSut('any_title', false);
     const {getByTestId} = render(sut);
 
-    fireEvent.press(getByTestId('reminder_card'));
+    fireEvent(getByTestId('reminder_card'), 'longPress');
 
-    expect(onPress).toHaveBeenCalled();
+    expect(onLongPress).toHaveBeenCalled();
+  });
+
+  it('should call onCheckPress when is pressed', () => {
+    const {sut, onCheckPress} = makeSut('any_title', false);
+    const {getByTestId} = render(sut);
+
+    fireEvent.press(getByTestId('reminder_check_button'));
+
+    expect(onCheckPress).toHaveBeenCalled();
   });
 
   it('should not render done icon when not done', () => {

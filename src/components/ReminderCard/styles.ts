@@ -12,7 +12,7 @@ export const Container = styled.TouchableOpacity`
   justify-content: space-between;
 `;
 
-export const CheckBox = styled.View`
+export const CheckBox = styled.Pressable`
   width: 30px;
   height: 30px;
   border: 1px;
