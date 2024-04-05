@@ -32,7 +32,14 @@ const CreateReminder: React.FC = () => {
         onChange={setTitle}
         placeholder="Digite o titulo do seu lembrete"
       />
-      <Button title="Salvar" onPress={handleAddReminder} />
+      <Box width="100%" align="flex-end" mt={10}>
+        <Button
+          title="Salvar"
+          onPress={handleAddReminder}
+          width={140}
+          height={40}
+        />
+      </Box>
     </Box>
   );
 };

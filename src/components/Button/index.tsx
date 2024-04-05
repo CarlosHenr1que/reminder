@@ -1,17 +1,17 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {Container, Title} from './styles';
 
 interface Props {
   title: string;
+  width?: number;
+  height?: number;
   onPress: () => void;
 }
 
-const Button: React.FC<Props> = ({title, onPress}) => {
+const Button: React.FC<Props> = ({title, width, height, onPress}) => {
   return (
-    <Container testID="button" onPress={onPress}>
-      <Icon name="add" size={22} color="#fff" />
+    <Container testID="button" onPress={onPress} width={width} height={height}>
       <Title>{title}</Title>
     </Container>
   );
