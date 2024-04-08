@@ -37,16 +37,20 @@ describe('Reminder', () => {
   it('should mark a reminder as done', async () => {
     const reminder = 'Comprar bolo';
     await createReminder(reminder);
-    await element(by.text(reminder)).tap();
 
-    await element(by.text('Finalizar lembrete')).tap();
+    await element(by.id('reminder_check_button')).atIndex(1).tap();
     await expect(element(by.id('done_icon'))).toBeVisible();
+  });
+
+  it('should mark a reminder as undone', async () => {
+    await element(by.id('reminder_check_button')).atIndex(1).tap();
+    await expect(element(by.id('done_icon'))).not.toBeVisible();
   });
 
   it('should delete a reminder', async () => {
     const reminder = 'Comprar bolacha';
     await createReminder(reminder);
-    await element(by.text(reminder)).tap();
+    await element(by.text(reminder)).longPress();
 
     await element(by.text('Deletar')).tap();
     await expect(element(by.text(reminder))).not.toBeVisible();
@@ -55,7 +59,7 @@ describe('Reminder', () => {
   it('should be able to cancel the reminder modal', async () => {
     const reminder = 'Comprar café';
     await createReminder(reminder);
-    await element(by.text(reminder)).tap();
+    await element(by.text(reminder)).longPress();
 
     await element(by.text('Cancelar')).tap();
     await expect(element(by.text(reminder))).toBeVisible();
