@@ -10,6 +10,7 @@ import Chooser from '../../components/Chooser';
 import {getWeekDayFor} from '../../utils/date/format';
 import Box from '../../components/common/Box';
 import {Header} from './components/Header';
+import {Reminder} from '../../models';
 
 const Reminders: React.FC = () => {
   const {data, doneReminder, undoReminder, deleteReminder} = useReminder();
@@ -30,6 +31,20 @@ const Reminders: React.FC = () => {
 
   const onHeaderIconPress = () => {
     handleCreateReminderPress();
+  };
+
+  const onCheckReminderPress = (reminder: Reminder) => {
+    setSelectedReminderId(reminder.id);
+    if (reminder.done) {
+      undoReminder(reminder.id);
+    } else {
+      doneReminder(reminder.id);
+    }
+  };
+
+  const onReminderCardLongPress = (reminder: Reminder) => {
+    setSelectedReminderId(reminder.id);
+    setIsChooserModalOpen(true);
   };
 
   return (
@@ -81,10 +96,8 @@ const Reminders: React.FC = () => {
           <ReminderCard
             title={item.title}
             done={item.done}
-            onPress={() => {
-              setIsChooserModalOpen(true);
-              setSelectedReminderId(item.id);
-            }}
+            onCheckPress={() => onCheckReminderPress(item)}
+            onLongPress={() => onReminderCardLongPress(item)}
           />
         )}
       />
